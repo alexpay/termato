@@ -24,7 +24,7 @@ def timer(t):
         sys.stdout.write("\033[K")
         print ('Pomodoro Sprint:','{0:02}:{1:02}'.format(t//60 , s), end="\r")
     
-    print("\n\nTermodoro Finished!\n")
+    print("\n\nPomodoro Finished!\n")
 
 if __name__ == '__main__':
     timer()
