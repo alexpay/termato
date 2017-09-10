@@ -10,18 +10,20 @@ import sys
 @click.command()
 @click.option('-t', default=25, help='Time in minutes.')
 
+
 def timer(t):
-    t *= 60
-    while (t >= 0):
-        try:
-            ts = ((t/60)%1)*60
-            s = int(round(ts))
-            sys.stdout.write("\033[K")
-            print ('Pomodoro Sprint:','{0:02}:{1:02}'.format(t//60 , s), end="\r")
-            time.sleep(1)
-            t-=1
-        except KeyboardInterrupt:
-            break
+    start = time.monotonic()
+    duration = (t * 60)
+    for x in range(0, duration + 1):
+        while time.monotonic() - start < x:
+                pass
+
+        t = (duration - x)
+        ts = ((t/60)%1)*60
+        s = int(round(ts))
+        sys.stdout.write("\033[K")
+        print ('Pomodoro Sprint:','{0:02}:{1:02}'.format(t//60 , s), end="\r")
+    
     print("\n\nTermodoro Finished!\n")
 
 if __name__ == '__main__':
